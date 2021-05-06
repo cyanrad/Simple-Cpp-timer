@@ -8,17 +8,18 @@ protected:
     std::chrono::time_point<std::chrono::high_resolution_clock> m_start_timepoint;
 
 protected:
-    //duration is in mSeconds
     void stop() {
         auto end_timepoint = std::chrono::high_resolution_clock::now();
 
         //you can change the time here
         //auto is long long
-        auto start = std::chrono::time_point_cast<std::chrono::milliseconds>(m_start_timepoint).time_since_epoch().count();
-        auto end = std::chrono::time_point_cast<std::chrono::milliseconds>(end_timepoint).time_since_epoch().count();
+        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_start_timepoint).time_since_epoch().count();
+        auto end = std::chrono::time_point_cast<std::chrono::microseconds>(end_timepoint).time_since_epoch().count();
 
-        auto duration = end - start;
-        std::cout << duration << " ms" << std::endl;
+        long durationUS = end - start;
+        long durationMS = durationUS / 1000;
+        long durationS = durationMS / 1000;
+        printf("%ius : %ims : %is\n", durationUS, durationMS, durationS);
     }
 };
 
